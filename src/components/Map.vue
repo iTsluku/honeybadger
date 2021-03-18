@@ -3,7 +3,6 @@
     <h3>{{ map.name }}</h3>
     <img :src="getImageURL()" />
     <p>T{{ map.difficulty }}</p>
-    <p>{{ map.created_on }}</p>
   </div>
 </template>
 
@@ -27,14 +26,17 @@ export default {
 
 <style scope>
 .map {
-  background: #f4f4f4;
+  background: #adb5bd;
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
 }
 .map h3 {
+  /* 1 pixel black shadow to left, top, right and bottom */
+  text-shadow: -1px 0 #6c757d, 0 1px #6c757d, 1px 0 #6c757d, 0 -1px #6c757d;
   font-family: Verdana;
-  padding: 5px;
+  color: #343a40;
+  padding: 7px;
   display: flex;
   align-items: center;
   justify-content: space-between;

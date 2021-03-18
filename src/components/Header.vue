@@ -1,7 +1,7 @@
 <template>
   <header>
     <h1>{{ title }}</h1>
-    <Button @click="genMapPerTier()" text="Generate" color="DodgerBlue" />
+    <Button @click="genMapPerTier()" text="Generate" color="#495057" />
   </header>
 </template>
 
@@ -33,5 +33,9 @@ header {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+}
+header h1 {
+  padding: 10px;
+  color: #faf9f9;
 }
 </style>

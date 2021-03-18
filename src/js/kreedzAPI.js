@@ -46,13 +46,54 @@ export async function getMapPerTier() {
             var randomMap = tiers[tierKey][index];
 
             if (randomMap) {
-                weeklyMaps.push(randomMap);
+                addWRHolder(randomMap).then((response) => weeklyMaps.push(response));
             } else {
                 reject(new Error(`Tier ${tierKey} object is empty (no element) - no global map for this tier!`));
             }
         }
         resolve(weeklyMaps);
     });
+}
+
+const addWRHolder = async function (obj) {
+    //TODO rm
+    const debug = false;
+    var replace_with_obj_when_done;
+
+    if (debug) {
+        replace_with_obj_when_done = obj;
+    } else {
+        replace_with_obj_when_done = false;
+    }
+
+    if (replace_with_obj_when_done) { //TODO replace
+        const map_id = obj.id;
+        var modes = ['kz_timer', 'kz_simple', 'kz_vanilla'];
+        var types = ['PRO', 'TP'];
+
+        for (var i = 0; i < modes.length; i++) {
+            for (var j = 0; j < types.length; j++) {
+                var has_teleports;
+                if (types[j] === 'PRO') {
+                    has_teleports = false;
+                } else if (types[j] === 'TP') {
+                    has_teleports = true;
+                }
+                var url = "https://kztimerglobal.com/api/v2.0/records/top?map_id=" + map_id + "&overall=false&stage=0&modes_list=" + modes[i] + "&has_teleports=" + has_teleports + "&limit=1";
+                const wrResponse = await getJSON(url);
+                const wr = JSON.parse(wrResponse);
+
+                if (wr[0] && wr[0].player_name && wr[0].time) {
+                    obj[modes[i] + types[j] + 'player_name'] = wr[0].player_name;
+                    obj[modes[i] + types[j] + 'time'] = wr[0].time;
+                } else {
+                    obj[modes[i] + types[j] + 'player_name'] = "NULL";
+                    obj[modes[i] + types[j] + 'time'] = "NULL";
+                }
+            }
+        }
+    }
+    return obj;
 }
 
 function getRandomInt(min, max) {

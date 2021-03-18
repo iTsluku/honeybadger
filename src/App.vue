@@ -2,11 +2,13 @@
   <div class="container">
     <Header @add-maps="addMaps" title="Honey Badger" />
     <Maps :maps="maps" />
+    <Footer />
   </div>
 </template>
 
 <script>
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Maps from "./components/Maps";
 import * as KreedzAPI from "./js/kreedzAPI.js";
 
@@ -14,6 +16,7 @@ export default {
   name: "App",
   components: {
     Header,
+    Footer,
     Maps,
   },
   methods: {
@@ -44,17 +47,20 @@ body {
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
-  border: 1px solid steelblue;
+  border: 1px solid #495057;
   padding: 30px;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  background: #212529;
 }
 .btn {
   display: inline-block;
   background: #000;
-  color: #fff;
+  color: #faf9f9;
   border: none;
   padding: 10px 20px;
-  margin: 5px;
+  margin: 10px;
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
