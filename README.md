@@ -19,4 +19,12 @@ npm run build
 ```
 npm run lint
 ```
+## Contributors
 
+- Andreas Einwiller
+
+## License & copyright
+
+© Andreas Einwiller
+
+Licensed under the [Apache License 2.0](LICENSE)
