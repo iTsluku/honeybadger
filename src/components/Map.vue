@@ -3,11 +3,13 @@
     <h3>{{ map.name }}</h3>
     <img :src="getImageURL()" />
     <p>
-      Pro <mark>{{ map.kz_timerPROtime }}</mark> by
+      {{ pad("\u00A0\u00A0\u00A0", "Pro", false) }}
+      <mark>{{ map.kz_timerPROtime }}</mark> by
       <mark>{{ map.kz_timerPROplayer_name }}</mark>
     </p>
     <p>
-      TP <mark>{{ map.kz_timerTPtime }}</mark> by
+      {{ pad("\u00A0\u00A0\u00A0", "TP", false) }}
+      <mark>{{ map.kz_timerTPtime }}</mark> by
       <mark>{{ map.kz_timerTPplayer_name }}</mark>
     </p>
   </div>
@@ -26,6 +28,16 @@ export default {
         this.map.name +
         ".jpg"
       );
+    },
+    pad: function (pad, str, padLeft) {
+      if (typeof str === "undefined") {
+        return pad;
+      }
+      if (padLeft) {
+        return (pad + str).slice(-pad.length);
+      } else {
+        return (str + pad).substring(0, pad.length);
+      }
     },
   },
 };
