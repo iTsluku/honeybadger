@@ -2,16 +2,14 @@
   <div class="map">
     <h3>{{ map.name }}</h3>
     <img :src="getImageURL()" />
-    <p>
-      {{ pad("\u00A0\u00A0\u00A0", "Pro", false) }}
-      <mark>{{ map.kz_timerPROtime }}</mark> by
+    <div class="wr">
+      <span class="type">Pro</span><mark>{{ map.kz_timerPROtime }}</mark> by
       <mark>{{ map.kz_timerPROplayer_name }}</mark>
-    </p>
-    <p>
-      {{ pad("\u00A0\u00A0\u00A0", "TP", false) }}
-      <mark>{{ map.kz_timerTPtime }}</mark> by
+    </div>
+    <div class="wr">
+      <span class="type">TP</span><mark>{{ map.kz_timerTPtime }}</mark> by
       <mark>{{ map.kz_timerTPplayer_name }}</mark>
-    </p>
+    </div>
   </div>
 </template>
 
@@ -29,16 +27,6 @@ export default {
         ".jpg"
       );
     },
-    pad: function (pad, str, padLeft) {
-      if (typeof str === "undefined") {
-        return pad;
-      }
-      if (padLeft) {
-        return (pad + str).slice(-pad.length);
-      } else {
-        return (str + pad).substring(0, pad.length);
-      }
-    },
   },
 };
 </script>
@@ -47,7 +35,7 @@ export default {
 .map {
   background: #adb5bd;
   margin: 5px;
-  padding: 10px 20px;
+  padding: 5px 20px;
   cursor: pointer;
 }
 .map h3 {
@@ -60,10 +48,15 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
-.map p {
+.map .wr {
   font-family: verdana;
+  padding: 2px;
 }
-.map p mark {
+.map .wr .type {
+  display: inline-block;
+  width: 32px;
+}
+.map .wr mark {
   color: #540b0e;
   background: #adb5bd;
   font-weight: bolder;
