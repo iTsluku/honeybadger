@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    <Header @add-maps="addMaps" title="Honey Badger" />
+    <Header
+      @add-maps="addMaps"
+      @change-mode="changeMode"
+      title="Honey Badger"
+    />
     <Maps :maps="maps" />
     <Footer />
   </div>
@@ -21,7 +25,15 @@ export default {
   },
   methods: {
     addMaps() {
-      KreedzAPI.getMapPerTier().then((response) => (this.maps = response));
+      KreedzAPI.getMapPerTier().then((maps) => {
+        maps = maps.sort(function (a, b) {
+          return a.difficulty - b.difficulty;
+        });
+        this.maps = maps;
+      });
+    },
+    changeMode(mode) {
+      console.log(mode);
     },
   },
   data() {

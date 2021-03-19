@@ -38,6 +38,7 @@ export async function getMapPerTier() {
             }
         }
         const tierKeys = Object.keys(tiers);
+        var count = 0;
 
         for (const tierKey of tierKeys) {
             const min = 0;
@@ -46,27 +47,22 @@ export async function getMapPerTier() {
             var randomMap = tiers[tierKey][index];
 
             if (randomMap) {
-                addWRHolder(randomMap).then((response) => weeklyMaps.push(response));
+                addWRHolder(randomMap).then((response) => {
+                    weeklyMaps.push(response)
+                    count += 1;
+                    if (count === tierKeys.length) {
+                        resolve(weeklyMaps);
+                    }
+                });
             } else {
                 reject(new Error(`Tier ${tierKey} object is empty (no element) - no global map for this tier!`));
             }
         }
-        resolve(weeklyMaps);
     });
 }
 
 const addWRHolder = async function (obj) {
-    //TODO rm
-    const debug = false;
-    var replace_with_obj_when_done;
-
-    if (debug) {
-        replace_with_obj_when_done = obj;
-    } else {
-        replace_with_obj_when_done = false;
-    }
-
-    if (replace_with_obj_when_done) { //TODO replace
+    if (obj) {
         const map_id = obj.id;
         var modes = ['kz_timer', 'kz_simple', 'kz_vanilla'];
         var types = ['PRO', 'TP'];
@@ -85,7 +81,8 @@ const addWRHolder = async function (obj) {
 
                 if (wr[0] && wr[0].player_name && wr[0].time) {
                     obj[modes[i] + types[j] + 'player_name'] = wr[0].player_name;
-                    obj[modes[i] + types[j] + 'time'] = wr[0].time;
+                    var timeFormatNew = new Date(wr[0].time * 1000).toISOString().substr(11, 8)
+                    obj[modes[i] + types[j] + 'time'] = timeFormatNew;
                 } else {
                     obj[modes[i] + types[j] + 'player_name'] = "NULL";
                     obj[modes[i] + types[j] + 'time'] = "NULL";

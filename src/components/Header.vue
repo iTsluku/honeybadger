@@ -1,6 +1,13 @@
 <template>
   <header>
     <h1>{{ title }}</h1>
+    <div class="select-wrapper">
+      <select name="Mode" v-model="mode" @change="updateMode(mode)">
+        <option value="kz_timer">KZT</option>
+        <option value="kz_simple">SKZ</option>
+        <option value="kz_vanilla">VNL</option>
+      </select>
+    </div>
     <Button @click="genMapPerTier()" text="Generate" color="#495057" />
   </header>
 </template>
@@ -22,6 +29,9 @@ export default {
   methods: {
     genMapPerTier() {
       this.$emit("add-maps");
+    },
+    updateMode(mode) {
+      this.$emit("change-mode", mode);
     },
   },
 };

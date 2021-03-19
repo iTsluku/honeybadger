@@ -2,7 +2,14 @@
   <div class="map">
     <h3>{{ map.name }}</h3>
     <img :src="getImageURL()" />
-    <p>T{{ map.difficulty }}</p>
+    <p>
+      Pro <mark>{{ map.kz_timerPROtime }}</mark> by
+      <mark>{{ map.kz_timerPROplayer_name }}</mark>
+    </p>
+    <p>
+      TP <mark>{{ map.kz_timerTPtime }}</mark> by
+      <mark>{{ map.kz_timerTPplayer_name }}</mark>
+    </p>
   </div>
 </template>
 
@@ -43,6 +50,11 @@ export default {
 }
 .map p {
   font-family: verdana;
+}
+.map p mark {
+  color: #540b0e;
+  background: #adb5bd;
+  font-weight: bolder;
 }
 .map img {
   max-width: 100%;
