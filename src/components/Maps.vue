@@ -1,6 +1,6 @@
 <template>
   <div :key="map.id" v-for="map in maps">
-    <Map :map="map" />
+    <Map :map="map" :mode="mode" />
   </div>
 </template>
 
@@ -11,6 +11,7 @@ export default {
   name: "Maps",
   props: {
     maps: Array,
+    mode: String,
   },
   components: {
     Map,

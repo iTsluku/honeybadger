@@ -3,7 +3,7 @@
     <h1>{{ title }}</h1>
     <div class="select-wrapper">
       <select name="Mode" v-model="mode" @change="updateMode(mode)">
-        <option value="kz_timer">KZT</option>
+        <option value="kz_timer" selected>KZT</option>
         <option value="kz_simple">SKZ</option>
         <option value="kz_vanilla">VNL</option>
       </select>

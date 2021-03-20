@@ -5,7 +5,7 @@
       @change-mode="changeMode"
       title="Honey Badger"
     />
-    <Maps :maps="maps" />
+    <Maps :maps="maps" :mode="mode" />
     <Footer />
   </div>
 </template>
@@ -33,12 +33,13 @@ export default {
       });
     },
     changeMode(mode) {
-      console.log(mode);
+      this.mode = mode;
     },
   },
   data() {
     return {
       maps: [],
+      mode: "kz_timer",
     };
   },
   created() {},

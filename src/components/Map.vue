@@ -3,12 +3,12 @@
     <h3>{{ map.name }}</h3>
     <img :src="getImageURL()" />
     <div class="wr">
-      <span class="type">Pro</span><mark>{{ map.kz_timerPROtime }}</mark> by
-      <mark>{{ map.kz_timerPROplayer_name }}</mark>
+      <span class="type">Pro</span><mark>{{ map[`${mode}PROtime`] }} </mark> by
+      <mark>{{ map[`${mode}PROplayer_name`] }}</mark>
     </div>
     <div class="wr">
-      <span class="type">TP</span><mark>{{ map.kz_timerTPtime }}</mark> by
-      <mark>{{ map.kz_timerTPplayer_name }}</mark>
+      <span class="type">TP</span><mark>{{ map[`${mode}TPtime`] }}</mark> by
+      <mark>{{ map[`${mode}TPplayer_name`] }}</mark>
     </div>
   </div>
 </template>
@@ -18,6 +18,7 @@ export default {
   name: "Map",
   props: {
     map: Object,
+    mode: String,
   },
   methods: {
     getImageURL: function () {
