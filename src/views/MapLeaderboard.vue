@@ -1,58 +1,56 @@
 <template>
   <div class="content">
-    <h3>{{ mapName }}</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>name</th>
-          <th>time</th>
-          <th>teleports</th>
-          <th>points</th>
-          <th>server name</th>
-          <th>date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="time in timesPRO" :key="time.id">
-          <td>{{ time.player_name }}</td>
-          <td>{{ time.time }}</td>
-          <td>{{ time.teleports }}</td>
-          <td>{{ time.points }}</td>
-          <td>{{ time.server_name }}</td>
-          <td>{{ time.updated_on }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <table>
-      <thead>
-        <tr>
-          <th>name</th>
-          <th>time</th>
-          <th>teleports</th>
-          <th>points</th>
-          <th>server name</th>
-          <th>date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="time in timesTP" :key="time.id">
-          <td>{{ time.player_name }}</td>
-          <td>{{ time.time }}</td>
-          <td>{{ time.teleports }}</td>
-          <td>{{ time.points }}</td>
-          <td>{{ time.server_name }}</td>
-          <td>{{ time.updated_on }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <Map :map="map" :mode="mode" />
+    <div class="tbl">
+      <table>
+        <thead>
+          <tr>
+            <th class="p-name">name</th>
+            <th>time</th>
+            <th class="tp">teleports</th>
+            <th>date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="time in timesPRO" :key="time.id">
+            <td class="p-name">{{ time.player_name }}</td>
+            <td>{{ time.time_format }}</td>
+            <td class="tp"></td>
+            <td>{{ time.updated_on }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table>
+        <thead>
+          <tr>
+            <th class="p-name">name</th>
+            <th>time</th>
+            <th class="tp">teleports</th>
+            <th>date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="time in timesTP" :key="time.id">
+            <td class="p-name">{{ time.player_name }}</td>
+            <td>{{ time.time_format }}</td>
+            <td class="tp">{{ time.teleports }}</td>
+            <td>{{ time.updated_on }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <router-link to="/">Go Back</router-link>
   </div>
 </template>
 <script>
+import Map from "../components/Map";
 import * as KreedzAPI from "../js/kreedzAPI";
 
 export default {
   name: "MapLeaderboard",
+  components: {
+    Map,
+  },
   props: {
     maps: Array,
     mode: String,
@@ -80,16 +78,32 @@ export default {
         });
       });
     },
+    getMap() {
+      for (var m in this.maps) {
+        if (this.maps[m].name === this.mapName) {
+          this.map = this.maps[m];
+          return this.maps[m];
+        }
+      }
+    },
   },
   data() {
     return {
       timesPRO: this.getPROTimes(),
       timesTP: this.getTPTimes(),
+      map: this.getMap(),
     };
   },
 };
 </script>
 <style scoped>
+.map {
+  margin-bottom: 35px;
+}
+.tbl {
+  margin-top: 25px;
+  margin: 5px;
+}
 table {
   width: 100%;
   border-collapse: collapse;
@@ -102,6 +116,16 @@ td {
 }
 td {
   color: #495057;
+}
+th {
+  color: #faf9f9;
+}
+th.p-name {
+  width: 130px;
+  overflow: hidden;
+}
+td.tp {
+  text-align: center;
 }
 a {
   color: #adb5bd;

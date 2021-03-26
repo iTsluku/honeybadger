@@ -125,7 +125,7 @@ export async function getTop20Past30DaysPRO(mapName, mode) {
         const TIMES_LIMIT = 20;
         const DAY_INTERVAL = 30;
         var created_since = new Date(new Date().setDate(new Date().getDate() - DAY_INTERVAL)).toISOString()
-        var urlPRO = "https://kztimerglobal.com/api/v2.0/records/top/recent?map_name=" + mapName + "&has_teleports=false&stage=0&modes_list=" + mode + "&created_since=" + created_since + "&limit=100000";
+        var urlPRO = "https://kztimerglobal.com/api/v2.0/records/top/recent?map_name=" + mapName + "&has_teleports=false&stage=0&modes_list=" + mode + "&created_since=" + created_since + "&limit=10000";
         const responsePRO = await getJSON(urlPRO);
         var timesPRO = JSON.parse(responsePRO);
 
@@ -134,6 +134,10 @@ export async function getTop20Past30DaysPRO(mapName, mode) {
 
             if (timesPRO.length && timesPRO.length > TIMES_LIMIT - 1) {
                 timesPRO = timesPRO.slice(0, TIMES_LIMIT);
+            }
+            for (var t in timesPRO) {
+                var time_format = new Date(timesPRO[t].time * 1000).toISOString().substr(11, 8);
+                timesPRO[t]['time_format'] = time_format;
             }
             return timesPRO;
         }
@@ -145,7 +149,7 @@ export async function getTop20Past30DaysTP(mapName, mode) {
         const TIMES_LIMIT = 20;
         const DAY_INTERVAL = 30;
         var created_since = new Date(new Date().setDate(new Date().getDate() - DAY_INTERVAL)).toISOString()
-        var urlTP = "https://kztimerglobal.com/api/v2.0/records/top/recent?map_name=" + mapName + "&has_teleports=true&stage=0&modes_list=" + mode + "&created_since=" + created_since + "&limit=100000";
+        var urlTP = "https://kztimerglobal.com/api/v2.0/records/top/recent?map_name=" + mapName + "&has_teleports=true&stage=0&modes_list=" + mode + "&created_since=" + created_since + "&limit=10000";
         const responseTP = await getJSON(urlTP);
         var timesTP = JSON.parse(responseTP);
 
@@ -154,6 +158,10 @@ export async function getTop20Past30DaysTP(mapName, mode) {
 
             if (timesTP.length && timesTP.length > TIMES_LIMIT - 1) {
                 timesTP = timesTP.slice(0, TIMES_LIMIT);
+            }
+            for (var t in timesTP) {
+                var time_format = new Date(timesTP[t].time * 1000).toISOString().substr(11, 8);
+                timesTP[t]['time_format'] = time_format;
             }
             return timesTP;
         }
