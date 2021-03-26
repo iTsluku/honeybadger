@@ -12,7 +12,9 @@ export default {
     color: String,
   },
   methods: {
-    onClick() {},
+    onClick() {
+      this.$emit("btn-click");
+    },
   },
 };
 </script>

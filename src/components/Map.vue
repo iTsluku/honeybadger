@@ -3,12 +3,14 @@
     <h3>{{ map.name }}</h3>
     <img :src="getImageURL()" />
     <div class="wr">
-      <span class="type">Pro</span><mark>{{ map[`${mode}PROtime`] }} </mark> by
-      <mark>{{ map[`${mode}PROplayer_name`] }}</mark>
+      <span class="type">Pro</span
+      ><mark-time>{{ map[`${mode}PROtime`] }} </mark-time> by
+      <mark-name>{{ map[`${mode}PROplayer_name`] }}</mark-name>
     </div>
     <div class="wr">
-      <span class="type">TP</span><mark>{{ map[`${mode}TPtime`] }}</mark> by
-      <mark>{{ map[`${mode}TPplayer_name`] }}</mark>
+      <span class="type">TP</span
+      ><mark-time>{{ map[`${mode}TPtime`] }}</mark-time> by
+      <mark-name>{{ map[`${mode}TPplayer_name`] }}</mark-name>
     </div>
   </div>
 </template>
@@ -57,10 +59,22 @@ export default {
   display: inline-block;
   width: 32px;
 }
-.map .wr mark {
+.map .wr mark-time {
   color: #540b0e;
   background: #adb5bd;
   font-weight: bolder;
+  display: inline-block;
+  width: 82px;
+}
+.map .wr mark-name {
+  color: #540b0e;
+  background: #adb5bd;
+  font-weight: bolder;
+  display: inline-block;
+  width: 235px;
+  overflow: hidden;
+  text-overflow: clip ellipsis;
+  vertical-align: bottom;
 }
 .map img {
   max-width: 100%;
