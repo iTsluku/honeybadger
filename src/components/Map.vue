@@ -1,5 +1,5 @@
 <template>
-  <div class="map">
+  <div class="map" style="cursor: pointer" @click="redirectToMapLeaderboard">
     <h3>{{ map.name }}</h3>
     <img :src="getImageURL()" />
     <div class="wr">
@@ -31,6 +31,12 @@ export default {
         this.map.name +
         ".jpg"
       );
+    },
+    redirectToMapLeaderboard() {
+      var pathStr = "/leaderboard/" + this.map.name;
+      this.$router.push({
+        path: pathStr,
+      });
     },
   },
 };

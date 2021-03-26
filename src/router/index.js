@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home'
 import About from '../views/About'
+import MapLeaderboard from '../views/MapLeaderboard.vue'
 
 const routes = [
     {
@@ -13,6 +14,11 @@ const routes = [
         name: 'About',
         component: About,
     },
+    {
+        path: '/leaderboard/:id',
+        name: 'MapLeaderboard',
+        component: MapLeaderboard,
+    }
 ]
 
 const router = createRouter({
