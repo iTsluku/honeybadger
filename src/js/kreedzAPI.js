@@ -135,14 +135,13 @@ export async function getTop20Past30DaysPRO(mapName, mode) {
             if (timesPRO.length && timesPRO.length > TIMES_LIMIT - 1) {
                 timesPRO = timesPRO.slice(0, TIMES_LIMIT);
             }
-            console.log(timesPRO);
             return timesPRO;
         }
     }
 }
 
 export async function getTop20Past30DaysTP(mapName, mode) {
-    if (mapName) {
+    if (mapName && mode) {
         const TIMES_LIMIT = 20;
         const DAY_INTERVAL = 30;
         var created_since = new Date(new Date().setDate(new Date().getDate() - DAY_INTERVAL)).toISOString()
@@ -156,7 +155,6 @@ export async function getTop20Past30DaysTP(mapName, mode) {
             if (timesTP.length && timesTP.length > TIMES_LIMIT - 1) {
                 timesTP = timesTP.slice(0, TIMES_LIMIT);
             }
-            console.log(timesTP);
             return timesTP;
         }
     }
