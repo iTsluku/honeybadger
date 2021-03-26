@@ -113,3 +113,51 @@ export async function getFirstMapNameSubstring(pattern) {
         reject(new Error(`pattern ${pattern} not found in any global map!`));
     });
 }
+
+const sortTimes = async function (list) {
+    return list.sort(function (a, b) {
+        return a.time - b.time;
+    });
+}
+
+export async function getTop20Past30DaysPRO(mapName, mode) {
+    if (mapName) {
+        const TIMES_LIMIT = 20;
+        const DAY_INTERVAL = 30;
+        var created_since = new Date(new Date().setDate(new Date().getDate() - DAY_INTERVAL)).toISOString()
+        var urlPRO = "https://kztimerglobal.com/api/v2.0/records/top/recent?map_name=" + mapName + "&has_teleports=false&stage=0&modes_list=" + mode + "&created_since=" + created_since + "&limit=100000";
+        const responsePRO = await getJSON(urlPRO);
+        var timesPRO = JSON.parse(responsePRO);
+
+        if (timesPRO) {
+            timesPRO = await sortTimes(timesPRO);
+
+            if (timesPRO.length && timesPRO.length > TIMES_LIMIT - 1) {
+                timesPRO = timesPRO.slice(0, TIMES_LIMIT);
+            }
+            console.log(timesPRO);
+            return timesPRO;
+        }
+    }
+}
+
+export async function getTop20Past30DaysTP(mapName, mode) {
+    if (mapName) {
+        const TIMES_LIMIT = 20;
+        const DAY_INTERVAL = 30;
+        var created_since = new Date(new Date().setDate(new Date().getDate() - DAY_INTERVAL)).toISOString()
+        var urlTP = "https://kztimerglobal.com/api/v2.0/records/top/recent?map_name=" + mapName + "&has_teleports=true&stage=0&modes_list=" + mode + "&created_since=" + created_since + "&limit=100000";
+        const responseTP = await getJSON(urlTP);
+        var timesTP = JSON.parse(responseTP);
+
+        if (timesTP) {
+            timesTP = await sortTimes(timesTP);
+
+            if (timesTP.length && timesTP.length > TIMES_LIMIT - 1) {
+                timesTP = timesTP.slice(0, TIMES_LIMIT);
+            }
+            console.log(timesTP);
+            return timesTP;
+        }
+    }
+}
