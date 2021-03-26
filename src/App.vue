@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <Header
+      :modes="modes"
       @add-maps="addMaps"
       @change-mode="changeMode"
       title="Honey Badger"
@@ -40,6 +41,11 @@ export default {
     return {
       maps: [],
       mode: "kz_timer",
+      modes: [
+        { id: 0, mode: "kz_timer", name: "KZT" },
+        { id: 1, mode: "kz_simple", name: "SKZ" },
+        { id: 2, mode: "kz_vanilla", name: "VNL" },
+      ],
     };
   },
   created() {},

@@ -2,10 +2,10 @@
   <header>
     <h1>{{ title }}</h1>
     <div class="select-wrapper">
-      <select name="Mode" v-model="mode" @change="$emit('change-mode', mode)">
-        <option value="kz_timer" selected>KZT</option>
-        <option value="kz_simple">SKZ</option>
-        <option value="kz_vanilla">VNL</option>
+      <select v-model="selected" @change="$emit('change-mode', selected)">
+        <option :key="m.id" v-for="m in modes" :value="m.mode">
+          {{ m.name }}
+        </option>
       </select>
     </div>
     <Button @btn-click="$emit('add-maps')" text="Generate" color="#495057" />
@@ -22,9 +22,15 @@ export default {
       type: String,
       default: "NULL",
     },
+    modes: Array,
   },
   components: {
     Button,
+  },
+  data() {
+    return {
+      selected: "kz_timer",
+    };
   },
 };
 </script>
