@@ -6,7 +6,7 @@
       @change-mode="changeMode"
       title="Honey Badger"
     />
-    <Maps :maps="maps" :mode="mode" />
+    <router-view :maps="maps" :mode="mode"></router-view>
     <Footer />
   </div>
 </template>
@@ -14,7 +14,6 @@
 <script>
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Maps from "./components/Maps";
 import * as KreedzAPI from "./js/kreedzAPI.js";
 
 export default {
@@ -22,7 +21,6 @@ export default {
   components: {
     Header,
     Footer,
-    Maps,
   },
   methods: {
     addMaps() {
@@ -48,7 +46,6 @@ export default {
       ],
     };
   },
-  created() {},
 };
 </script>
 
@@ -60,6 +57,7 @@ export default {
 }
 body {
   font-family: sans-serif;
+  background: #212529;
 }
 .container {
   max-width: 500px;

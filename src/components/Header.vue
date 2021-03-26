@@ -1,14 +1,19 @@
 <template>
   <header>
     <h1>{{ title }}</h1>
-    <div class="select-wrapper">
+    <div class="select-wrapper" v-show="homePage">
       <select v-model="selected" @change="$emit('change-mode', selected)">
         <option :key="m.id" v-for="m in modes" :value="m.mode">
           {{ m.name }}
         </option>
       </select>
     </div>
-    <Button @btn-click="$emit('add-maps')" text="Generate" color="#495057" />
+    <Button
+      v-show="homePage"
+      @btn-click="$emit('add-maps')"
+      text="Generate"
+      color="#495057"
+    />
   </header>
 </template>
 
@@ -26,6 +31,11 @@ export default {
   },
   components: {
     Button,
+  },
+  computed: {
+    homePage() {
+      return this.$route.path === "/";
+    },
   },
   data() {
     return {
