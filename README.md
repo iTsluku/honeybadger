@@ -19,14 +19,6 @@ npm run serve
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-## Contributors
-
-- Andreas Einwiller
-
 ## License & copyright
 
 © Andreas Einwiller
