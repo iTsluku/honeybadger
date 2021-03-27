@@ -137,7 +137,12 @@ export async function getTop20Past30DaysPRO(mapName, mode) {
             }
             for (var t in timesPRO) {
                 var time_format = new Date(timesPRO[t].time * 1000).toISOString().substr(11, 8);
+                var dateToFormat = new Date(timesPRO[t].updated_on);
+                var updated_on_format = ('0' + dateToFormat.getDate()).slice(-2) + '/'
+                    + ('0' + (dateToFormat.getMonth() + 1)).slice(-2) + '/'
+                    + dateToFormat.getFullYear();
                 timesPRO[t]['time_format'] = time_format;
+                timesPRO[t]['updated_on_format'] = updated_on_format;
             }
             return timesPRO;
         }
@@ -161,7 +166,12 @@ export async function getTop20Past30DaysTP(mapName, mode) {
             }
             for (var t in timesTP) {
                 var time_format = new Date(timesTP[t].time * 1000).toISOString().substr(11, 8);
+                var dateToFormat = new Date(timesTP[t].updated_on);
+                var updated_on_format = ('0' + dateToFormat.getDate()).slice(-2) + '/'
+                    + ('0' + (dateToFormat.getMonth() + 1)).slice(-2) + '/'
+                    + dateToFormat.getFullYear();
                 timesTP[t]['time_format'] = time_format;
+                timesTP[t]['updated_on_format'] = updated_on_format;
             }
             return timesTP;
         }

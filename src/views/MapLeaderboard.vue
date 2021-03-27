@@ -5,36 +5,40 @@
       <table>
         <thead>
           <tr>
+            <th class="t-place">#</th>
             <th class="p-name">name</th>
-            <th>time</th>
+            <th class="t-time">time</th>
             <th class="tp">teleports</th>
-            <th>date</th>
+            <th class="t-date">date</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="time in timesPRO" :key="time.id">
+          <tr v-for="(time, index) in timesPRO" :key="time.id">
+            <td class="t-place">{{ ++index }}</td>
             <td class="p-name">{{ time.player_name }}</td>
-            <td>{{ time.time_format }}</td>
+            <td class="t-time">{{ time.time_format }}</td>
             <td class="tp"></td>
-            <td>{{ time.updated_on }}</td>
+            <td class="t-date">{{ time.updated_on_format }}</td>
           </tr>
         </tbody>
       </table>
       <table>
         <thead>
           <tr>
+            <th class="t-place">#</th>
             <th class="p-name">name</th>
-            <th>time</th>
+            <th class="t-time">time</th>
             <th class="tp">teleports</th>
-            <th>date</th>
+            <th class="t-date">date</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="time in timesTP" :key="time.id">
+          <tr v-for="(time, index) in timesTP" :key="time.id">
+            <td class="t-place">{{ ++index }}</td>
             <td class="p-name">{{ time.player_name }}</td>
-            <td>{{ time.time_format }}</td>
+            <td class="t-time">{{ time.time_format }}</td>
             <td class="tp">{{ time.teleports }}</td>
-            <td>{{ time.updated_on }}</td>
+            <td class="t-date">{{ time.updated_on_format }}</td>
           </tr>
         </tbody>
       </table>
@@ -122,9 +126,28 @@ th {
 }
 th.p-name {
   width: 130px;
+  height: 19px;
   overflow: hidden;
 }
-td.tp {
+td.p-name {
+  padding-left: 5px;
+}
+th.t-place {
+  width: 25px;
+}
+th.tp {
+  width: 92px;
+}
+th.t-time {
+  width: 80px;
+}
+th.t-date {
+  width: 100px;
+}
+td.t-place,
+td.tp,
+td.t-time,
+td.t-date {
   text-align: center;
 }
 a {

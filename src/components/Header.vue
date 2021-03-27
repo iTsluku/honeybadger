@@ -1,7 +1,7 @@
 <template>
   <header>
     <h1>{{ title }}</h1>
-    <div class="select-wrapper" v-show="homePage">
+    <div class="select-wrapper" v-show="homePageOrLeaderboard">
       <select v-model="selected" @change="$emit('change-mode', selected)">
         <option :key="m.id" v-for="m in modes" :value="m.mode">
           {{ m.name }}
@@ -35,6 +35,11 @@ export default {
   computed: {
     homePage() {
       return this.$route.path === "/";
+    },
+    homePageOrLeaderboard() {
+      return (
+        this.$route.path === "/" || this.$route.path === "/leaderboard/:id"
+      );
     },
   },
   data() {
